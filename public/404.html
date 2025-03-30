@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Single page app routing for GitHub Pages
+    // Credit: https://github.com/rafgraph/spa-github-pages
+    const l = window.location;
+    
+    if (l.hostname.includes('github.io')) {
+      // GitHub Pages deployment
+      const segment = 1;
+      const repo = '/ProjLab42.github.io';
+      
+      // Redirect to the hash-based URL that React Router understands
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        repo.split(segment).slice(0, -1).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(segment).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    } else {
+      // Local development
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        '/#' + l.pathname
+      );
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting to ProjLab42 homepage...</p>
+</body>
+</html> 
